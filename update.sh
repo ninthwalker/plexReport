@@ -3,7 +3,7 @@
 PLEX_REPORT_LIB='/var/lib/plexReport'
 PLEX_REPORT_CONF='/etc/plexReport'
 
-/bin/echo "Grabbing newest code from https://github.com/bstascavage/plexReport"
+/bin/echo "Grabbing newest code from https://github.com/ninthwalker/plexReport"
 /usr/bin/git pull
 
 /bin/echo "Moving plexreport and plexreport-setup to /usr/local/sbin"
