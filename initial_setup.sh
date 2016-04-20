@@ -27,9 +27,6 @@ PLEX_REPORT_CONF='/etc/plexReport'
 /usr/bin/gem install bundler
 /usr/local/bin/bundle install
 
-ln -s /etc/plexReport/config.yaml /config/config.yaml
-ln -s /etc/plexReport/email_body.erb /config/email_body.erb
-
 /bin/echo "Running /usr/local/sbin/plexreport-setup"
 /usr/local/sbin/plexreport-setup
 
@@ -46,4 +43,4 @@ ln -s /etc/plexReport/email_body.erb /config/email_body.erb
 #/usr/bin/crontab mycron
 #/bin/rm mycron
 
-/bin/echo "Setup complete! Please create a cronjob from withinunraid to call the plexReport"
+/bin/echo "Setup complete! Please create a cronjob from within unraid to call the plexReport on a schedule."
