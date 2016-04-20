@@ -24,14 +24,20 @@ RUN \
 add-apt-repository "deb http://us.archive.ubuntu.com/ubuntu/ trusty universe multiverse" && \
 add-apt-repository "deb http://us.archive.ubuntu.com/ubuntu/ trusty-updates universe multiverse" && \
 apt-get update -q && \
-apt-get install -qy ruby ruby-dev git make gcc inotify-tools && \
+apt-get install -y curl patch gawk g++ gcc make libc6-dev patch libreadline6-dev zlib1g-dev libssl-dev libyaml-dev libsqlite3-dev sqlite3 autoconf libgdbm-dev libncurses5-dev automake libtool bison pkg-config libffi-dev && \
 apt-get clean -y && \
 rm -rf /var/lib/apt/lists/* && \
-git clone https://github.com/ninthwalker/plexReport.git /opt/plexReport && \
-cd /opt/plexReport/ && \
-gem install bundle
+useradd -ms /bin/bash app
 
-# RUN bundle update
+USER app
+
+RUN \
+gpg --keyserver hkp://keys.gnupg.net --recv-keys D39DC0E3 && \
+/bin/bash -l -c "curl -L get.rvm.io | bash -s stable --rails" && \
+/bin/bash -l -c "rvm install 2.1" && \
+/bin/bash -l -c "echo 'gem: --no-ri --no-rdoc' > ~/.gemrc" && \
+/bin/bash -l -c "gem install bundler --no-ri --no-rdoc" && \
+git clone https://github.com/ninthwalker/plexReport.git /opt/plexReport
   
 #Adding Custom files
 COPY scripts/ /etc/my_init.d/
