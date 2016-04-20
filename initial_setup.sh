@@ -27,6 +27,9 @@ PLEX_REPORT_CONF='/etc/plexReport'
 /usr/bin/gem install bundler
 /usr/local/bin/bundle install
 
+ln -s /etc/plexReport/config.yaml /config/config.yaml
+ln -s /etc/plexReport/email_body.erb /config/email_body.erb
+
 /bin/echo "Running /usr/local/sbin/plexreport-setup"
 /usr/local/sbin/plexreport-setup
 
