@@ -35,5 +35,5 @@ VOLUME /etc/plexReport
 
 
 # Add firstrun.sh to execute during container startup
-ADD firstrun.sh /etc/my_init.d/firstrun.sh
-RUN chmod +x /etc/my_init.d/firstrun.sh
+# ADD firstrun.sh /etc/my_init.d/firstrun.sh
+# RUN chmod +x /etc/my_init.d/firstrun.sh
