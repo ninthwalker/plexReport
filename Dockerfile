@@ -36,8 +36,8 @@ gem install bundle
 #Adding Custom files
 COPY scripts/ /etc/my_init.d/
 RUN chmod -v +x /etc/my_init.d/*.sh
-RUN ln -s /etc/plexReport/config.yaml /config/config.yaml && \ 
-ln -s /etc/plexReport/email_body.erb /config/email_body.erb
+# RUN ln -s /etc/plexReport/config.yaml /config/config.yaml && \ 
+# ln -s /etc/plexReport/email_body.erb /config/email_body.erb
 
 #Mappings and ports
 VOLUME ["/config"]
