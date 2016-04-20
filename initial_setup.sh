@@ -17,7 +17,7 @@ PLEX_REPORT_CONF='/config'
 /bin/cp -r etc/* $PLEX_REPORT_CONF
 
 /bin/echo "Creating /config/config.yaml"
-/usr/bin/touch /configt/config.yaml
+/usr/bin/touch /config/config.yaml
 /bin/echo "Creating /config/plexReport.log"
 /usr/bin/touch /config/plexReport.log
 
