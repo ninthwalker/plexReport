@@ -29,9 +29,9 @@ apt-get clean -y && \
 rm -rf /var/lib/apt/lists/* && \
 git clone https://github.com/ninthwalker/plexReport.git /opt/plexReport && \
 cd /opt/plexReport/ && \
-gem install bundle && \
+gem install bundle
 
-RUN bundle update
+# RUN bundle update
   
 #Adding Custom files
 COPY /opt/plexReport/initial_setup.sh /etc/my_init.d/
