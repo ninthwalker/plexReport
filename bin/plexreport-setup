@@ -17,7 +17,7 @@ class Setup
     def initialize
         begin
             $config = Hash.new
-#            $config = YAML.load_file(File.join(File.expand_path(File.dirname(__FILE__)), '../etc/config.yaml') )
+#            $config = YAML.load_file(File.join(File.expand_path(File.dirname(__FILE__)), '/config/config.yaml') )
         rescue Errno::ENOENT => e
             abort('Configuration file not found.  Exiting...')
         end
@@ -78,7 +78,7 @@ class Setup
         end
 
         $config['mail']['username'] = ask("Enter your SMTP username/email address (For Gmail, use email address)") { |q| q.echo = true }
-        $config['mail']['password'] = ask("Enter your email password (This will only be saved in etc/config.yaml)") { |q| q.echo = "*" }
+        $config['mail']['password'] = ask("Enter your email password (This will only be saved in config.yaml)") { |q| q.echo = "*" }
 
         $config['mail']['from'] = ask("Display name of the sender (default: Plex Server)") { |q| q.echo = true }
         if $config['mail']['from'].empty?
@@ -101,8 +101,8 @@ class Setup
         self.setPlexApiKey
         self.setEmail
 
-        File.open('/etc/plexReport/config.yaml', 'w') {|f| f.write $config.to_yaml }
-        puts "Writing information to /etc/plexReport/config.yaml"
+        File.open('/config/config.yaml', 'w') {|f| f.write $config.to_yaml }
+        puts "Writing information to /config/config.yaml"
     end
 end
 
