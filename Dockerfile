@@ -34,7 +34,7 @@ gem install bundle
 # RUN bundle update
   
 #Adding Custom files
-COPY /opt/plexReport/initial_setup.sh /etc/my_init.d/
+COPY scripts/ /etc/my_init.d/
 RUN chmod -v +x /etc/my_init.d/*.sh
 ln -s /config/config.yaml /etc/plexReport/config.yaml && \ ln -s /config/email_body.erb /etc/plexReport/email_body.erb
 
