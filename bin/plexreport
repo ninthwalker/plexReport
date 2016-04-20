@@ -62,13 +62,13 @@ class PlexReport
 
     def initialize
         begin
-            $config = YAML.load_file('/etc/plexReport/config.yaml')
+            $config = YAML.load_file('/config/config.yaml')
         rescue Errno::ENOENT => e
             abort('Configuration file not found.  Exiting...')
         end
 
         begin
-            $logger = Logger.new('/var/log/plexReport.log')
+            $logger = Logger.new('/config/plexReport.log')
             
             if $options[:verbose]
                 $logger.level = Logger::DEBUG
@@ -369,8 +369,8 @@ def main
     new_seasons = new_episodes[:seasons]
     new_episodes = new_episodes[:new]
 
-    YAML.load_file('/etc/plexReport/config.yaml')
-    template = ERB.new File.new("/etc/plexReport/email_body.erb").read, nil, "%"
+    YAML.load_file('/config/config.yaml')
+    template = ERB.new File.new("/config/email_body.erb").read, nil, "%"
     mail = MailReport.new($config, $options)
 
     if (movies.empty? && new_seasons.empty? && new_episodes.empty?)
