@@ -1,4 +1,5 @@
 FROM phusion/baseimage:0.9.15
+MAINTAINER: ninthwalker@gmail.com
 
 # Set correct environment variables
 ENV HOME /root 
@@ -30,4 +31,4 @@ rm -rf /var/lib/apt/lists/* && \
 git clone https://github.com/ninthwalker/plexReport.git /opt/plexReport
 
 #Mappings and ports
-VOLUME ["/config"]
+VOLUME /config
