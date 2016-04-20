@@ -35,3 +35,8 @@ ln -s /config/email_body.erb /opt/plexReport/etc/email_body.erb
 
 #Mappings and ports
 VOLUME /config
+
+
+# Add firstrun.sh to execute during container startup
+ADD firstrun.sh /etc/my_init.d/firstrun.sh
+RUN chmod +x /etc/my_init.d/firstrun.sh
