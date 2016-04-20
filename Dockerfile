@@ -1,5 +1,5 @@
 FROM phusion/baseimage:0.9.15
-MAINTAINER: ninthwalker@gmail.com
+MAINTAINER ninthwalker
 
 # Set correct environment variables
 ENV HOME /root 
