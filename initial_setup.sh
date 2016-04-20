@@ -23,8 +23,8 @@ PLEX_REPORT_CONF='/etc/plexReport'
 /bin/echo "Creating /var/log/plexReport.log"
 /usr/bin/touch /var/log/plexReport.log
 
-ln -s /etc/plexReport/config.yaml /config/config.yaml
-ln -s /etc/plexReport/email_body.erb /config/email_body.erb
+ln -s /config/config.yaml /etc/plexReport/config.yaml
+ln -s /config/email_body.erb /etc/plexReport/email_body.erb
 
 /bin/echo "Installing ruby gem dependency"
 /usr/bin/gem install bundler
