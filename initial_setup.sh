@@ -5,6 +5,7 @@
 
 PLEX_REPORT_LIB='/var/lib/plexReport'
 PLEX_REPORT_CONF='/etc/plexReport'
+PLEX_REPORT_EDIT='/config'
 
 /bin/echo "Creating plexreport library at /var/lib/plexReport"
 /bin/mkdir -p $PLEX_REPORT_LIB
@@ -15,16 +16,14 @@ PLEX_REPORT_CONF='/etc/plexReport'
 /bin/cp -r bin/* /usr/local/sbin
 /bin/echo "Moving plexreport libraries to /var/lib/plexreport"
 /bin/cp -r lib/* $PLEX_REPORT_LIB
-/bin/echo "Moving email_body.erb to /etc/plexreport"
+/bin/echo "Moving email_body.erb to /etc/plexreport & /config"
 /bin/cp -r etc/* $PLEX_REPORT_CONF
+/bin/cp -r etc/* $PLEX_REPORT_EDIT
 
 /bin/echo "Creating /etc/plexreport/config.yaml"
 /usr/bin/touch /etc/plexReport/config.yaml
 /bin/echo "Creating /var/log/plexReport.log"
 /usr/bin/touch /var/log/plexReport.log
-
-ln -s /config/config.yaml /etc/plexReport/config.yaml
-ln -s /config/email_body.erb /etc/plexReport/email_body.erb
 
 /bin/echo "Installing ruby gem dependency"
 /usr/bin/gem install bundler
