@@ -6,29 +6,29 @@
 PLEX_REPORT_LIB='/var/lib/plexReport'
 PLEX_REPORT_CONF='/etc/plexReport'
 
-#/bin/echo "Creating plexreport library at /var/lib/plexReport"
+/bin/echo "Creating plexreport library at /var/lib/plexReport"
 /bin/mkdir -p $PLEX_REPORT_LIB
-#/bin/echo "Creating plexreport conf directory at /etc/plexReport"
+/bin/echo "Creating plexreport conf directory at /etc/plexReport"
 /bin/mkdir -p $PLEX_REPORT_CONF
 
-#/bin/echo "Moving plexreport and plexreport-setup to /usr/local/sbin"
+/bin/echo "Moving plexreport and plexreport-setup to /usr/local/sbin"
 /bin/cp -r bin/* /usr/local/sbin
-#/bin/echo "Moving plexreport libraries to /var/lib/plexreport"
+/bin/echo "Moving plexreport libraries to /var/lib/plexreport"
 /bin/cp -r lib/* $PLEX_REPORT_LIB
-#/bin/echo "Moving email_body.erb to /etc/plexreport"
+/bin/echo "Moving email_body.erb to /etc/plexreport"
 /bin/cp -r etc/* $PLEX_REPORT_CONF
 
-#/bin/echo "Creating /etc/plexreport/config.yaml"
+/bin/echo "Creating /etc/plexreport/config.yaml"
 /usr/bin/touch /etc/plexReport/config.yaml
-#/bin/echo "Creating /var/log/plexReport.log"
+/bin/echo "Creating /var/log/plexReport.log"
 /usr/bin/touch /var/log/plexReport.log
 
-#/bin/echo "Installing ruby gem dependency"
+/bin/echo "Installing ruby gem dependency"
 /usr/bin/gem install bundler
 /usr/local/bin/bundle install
 
-#/bin/echo "Running /usr/local/sbin/plexreport-setup"
-#/usr/local/sbin/plexreport-setup
+/bin/echo "Running /usr/local/sbin/plexreport-setup"
+/usr/local/sbin/plexreport-setup
 
 #/bin/echo "What day do you want to run the script on? (Put 0 for Sunday, 1 for Monday, etc...)"
 #read CRON_DAY
@@ -43,4 +43,4 @@ PLEX_REPORT_CONF='/etc/plexReport'
 #/usr/bin/crontab mycron
 #/bin/rm mycron
 
-#/bin/echo "Setup complete!"
+/bin/echo "Setup complete! Please create a cronjob from withinunraid to call the plexReport"
