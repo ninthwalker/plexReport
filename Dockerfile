@@ -24,16 +24,10 @@ RUN \
 add-apt-repository "deb http://us.archive.ubuntu.com/ubuntu/ trusty universe multiverse" && \
 add-apt-repository "deb http://us.archive.ubuntu.com/ubuntu/ trusty-updates universe multiverse" && \
 apt-get update -q && \
-apt-get install -y ruby ruby-dev ruby-bundler && \
+apt-get install -qy ruby ruby-dev ruby-bundler && \
 apt-get clean -y && \
 rm -rf /var/lib/apt/lists/* && \
 git clone https://github.com/ninthwalker/plexReport.git /opt/plexReport
-  
-#Adding Custom files
-COPY scripts/ /etc/my_init.d/
-RUN chmod -v +x /etc/my_init.d/*.sh
-# RUN ln -s /etc/plexReport/config.yaml /config/config.yaml && \ 
-# ln -s /etc/plexReport/email_body.erb /config/email_body.erb
 
 #Mappings and ports
 VOLUME ["/config"]
