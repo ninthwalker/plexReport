@@ -53,14 +53,14 @@ Enter the following command in the unRAID shell. Replace the day/time with what 
 `crontab -l | { cat; echo "30 11 * * 5 docker exec plexReport plexreport -n -d"; } | crontab -`
 
 To keep the cronjob after a reboot, also add the line to your \boot\config\go file.  
-
-## email_body.erb
-
-This can be edited with CSS/HTML if you want to modify the look of the email.
     
-## Config file
+## Config
 
 By default, the config file is located in `/config/config.yaml`.  If you need to change any information for the program, or to add more optional config parameters, see below for the config file format:
+
+##### email_body.erb
+
+This file can be edited with CSS/HTML if you want to modify the look of the email.
 
 ###### email
 `title` - Banner title for the email body.  Required.
