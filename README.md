@@ -7,7 +7,7 @@ A dockerized version of bstascavage's original plexReport (https://github.com/bs
 This docker generates an email summary of new additions to Plex to send to your ursers
 
 ## Supported Platforms
-unRAID
+* unRAID
 
 ## Supported Email Clients
 * Gmail
