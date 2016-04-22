@@ -1,19 +1,16 @@
-plexWeeklyReport
+plexReport
 ================
 
-Scripts to generate a weekly email of new additions to Plex.
+A dockerized version of bstascavage's original plexReport (https://github.com/bstascavage/plexReport)
 
 ## Introduction
-This script is meant to send out a summary of all new Plex entries to your server to all of your server's users.  
+This docker generates an email summary of new additions to Plex to send to your ursers
 
 ## Supported Platforms
-* Debian
-* Ubuntu 14.04 LTS
-* Mac OSX
+unRAID
 
 ## Supported Email Clients
 * Gmail
-* Mozilla Thunderbird
 
 ## Supported Plex Agents
 * themoviedb
@@ -22,105 +19,48 @@ This script is meant to send out a summary of all new Plex entries to your serve
 
 ## Prerequisites
 
-The following are needed to run this script:
+The following are needed to run this docker:
 
-1.  Ruby installed (at least version 1.9.3) and ruby-dev.
-2.  For OSX: make sure you have Ruby installed using RVM (This is needed to create a wrapper to weekly run the script through crontab) (see http://railsapps.github.io/installrubyonrails-mac.html. Follow the steps from "Prepare your computer" until "Rails installation options").
-3.  themoviedb set as your Agent for your Movie section on your Plex server.
+1.  Plex.
+2.  themoviedb set as your Agent for your Movie section on your Plex server.
 3.  thetvdb.org set as your Agent for your TV section on your Plex server.
-4.  (Optional) A Gmail account to forward the email (Gmail is the only supported provider, so if you use another, YMMV).
+4.  A Gmail account to forward the email (Gmail is the only supported provider, so if you use another, YMMV).
 
-## Installation (Linux)
+## Installation (unRAID)
 
-1.  Clone this repo on your server:
+Prefered installation method: From the Community Applications 'APPS' section in unRAID.  
+You can also install by adding the following template repository to unraid:  
+https://github.com/ninthwalker/docker-templates/
 
-    `git clone https://github.com/bstascavage/plexReport.git`
-2.  Change to the plexReport directory
-3.  Run the initial_setup script:
+After installing, run the following commands from the command line:
 
-    `./initial_setup.sh`
+`docker exec -it plexReport bash`  
+`cd /opt/plexReport`  
+`./initial_setup.sh`  
 
-4.   If you want to run your script with different commandline parameters, you'll need to edit the crontab.  See here for reference: http://www.adminschoice.com/crontab-quick-reference
+Follow Prompts  
+
+plexReport can be run with the following command from unraid:  
+
+`docker exec plexReport plexreport [-options]`
+
+You can now edit the `config.yaml` (and optionally `email_body.erb`) with your own settings in your appdata dir.  
+See `/config/config.yaml.example` and below for details.
+
+To schedule the report to occur regulary setup a cron from within unraid:  
+Enter the following command in the unRAID shell. Replace the day/time with what you want:  
+
+`crontab -l | { cat; echo "30 11 * * 5 docker exec plexReport plexreport -n -d"; } | crontab -`
+
+To keep the cronjob after a reboot, also add the line to your \boot\config\go file.  
+
+## email_body.erb
+
+This can be edited with CSS/HTML if you want to modify the look of the email.
     
-## Installation (OS X)
-Part 1: Install plexReport
-
-1.  Clone this repo on your server:
-
-    `git clone https://github.com/bstascavage/plexReport.git`
-2.  Change to the plexReport directory
-3.  Install the blunder gem (http://bundler.io/)
-
-    `gem install bundler`
-4.  Install the gem dependecies:
-
-    `bundle install`
-5.  Setup the config file in `etc/config.yaml`.  See `etc/config.yaml.example` and below for details
-6.  Run `bin/plexreport` to execute the script
-It should work correctly    
-    
-
-Part 2: Create Ruby Wrapper
-
-Now to have the script run once a week through crontab, you have to create an RVM alias by doing the following steps:
-(Note: You need an RVM alias because launchd, cron, and other process schedulers operate in discrete bash shell environments. Simply calling ruby from inside your launchd or cron script will not work; that will invoke the non-RVM ruby that OS X shipped with. Instead, you need an RVM alias, which will run your file through RVM's ruby, from inside launchd.)
-
-1.  Determine your ruby version by entering
-
-    `which ruby`
-    this should results in:
-    `/Users/you/.rvm/rubies/ruby-2.2.0/bin/ruby`
-    ruby-2.2.0 is your ruby version
-    
-2.  Create a wrapper by entering 
-
-    `rvm alias create plexReport ruby-2.2.0@plexReport`
-    Note: Replace ruby-2.2.0 with the version that you have determined in step 1 
-    
-3.  Test the wrapper by entering    
-    
-    `$rvm_path/wrappers/plexReport/ruby <PATH_TO_REPO>/bin/plexReport.rb -t`
-    Note: Replace <PATH_TO_REPO> with the path leading to your plexReport directory 
-    
-    It should run and exit properly (be patient it might take a few minutes). 
-    
-4.  Next determine the absolute path to your wrapper. Just run
-
-    `echo $rvm_path`
-    it should result in something like this /users/esw1187/.rvm/
-    
-    Substitute '$rvm_path' in the wrapper call with the absolute rvm path obtaine above and run it again by entering
-    
-    `/users/ersw1187/.rvm/wrappers/plexReport/ruby /path_to/plexReport/bin/plexReport.rb`
-    
-5.  Create bash script to run the Rub code by doing the following:
-    - Create a file on your desktop named 'plexReport.sh' and open it with TextEdit
-
-    - Copy the following two lines in the file
-      `export LC_ALL=en_US.UTF-8`
-      `export LANG=en_US.UTF-8`
-    
-    - Add the wrapper call you just tested in step 4 to the file that you have just tested. E.g. 
-      `/users/ersw1187/.rvm/wrappers/plexReport/ruby /path_to/plexReport/bin/plexReport`
-    
-6.  Copy plexReport.sh to /user/local/bin directory    
-
-7.  Go to the /usr/local/bin directory and set the correct permissions by entering
-        `chmod u+x plexReport.sh`
-
-8.  Add the following line to your crontab (sudo crontab -e) 
-
-        `15 11 * * 5 <USERNAME> /usr/local/bin/plexReport.sh` 
-    (This will run it every Friday at 11:15. To change the time, see crontab documentation:     
-    http://www.adminschoice.com/crontab-quick-reference
-
-## Upgrading
-
-To upgrade your code, cd to your plexReport directory and run `./update.sh`
-
 ## Config file
 
-By default, the config file is located in `/etc/plexReport/config.yaml`.  If you need to change any information for the program, or to add more optional config parameters, see below for the config file format:
+By default, the config file is located in `/config/config.yaml`.  If you need to change any information for the program, or to add more optional config parameters, see below for the config file format:
 
 ###### email
 `title` - Banner title for the email body.  Required.
@@ -153,7 +93,7 @@ By default, the config file is located in `/etc/plexReport/config.yaml`.  If you
 
 ## Command-line Options
 
-Once installed, you can run the script by simply running `plexreport`.  If you need to reinstall or reconfigure the program, run `plexreport-setup`.  All commandline options can be seen by running `plexReport --help`
+Once installed, you can run the script by simply running `plexreport` from within the docker image container. If you need to reinstall or reconfigure the program, run `plexreport-setup`.  All commandline options can be seen by running `plexreport --help`
 
 ##### Options:
 `-n, --no-plex-email` - Do not send emails to Plex friends.  Can be used with the `recipients_email` and `recipients` config file option to customize email recipients.
@@ -169,10 +109,8 @@ Once installed, you can run the script by simply running `plexreport`.  If you n
 New Episodes:
 ![alt tag](http://i.imgur.com/hWzHl2x.png)
 
-
 New Seasons:
 ![alt tag](http://i.imgur.com/sBy62Ty.png)
-
 
 New Movies:
 ![alt tag](http://i.imgur.com/E3Q85uU.png)
