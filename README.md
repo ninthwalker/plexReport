@@ -58,7 +58,7 @@ To keep the cronjob after a reboot, also add the line to your \boot\config\go fi
 
 By default, the config file is located in `/config/config.yaml`.  If you need to change any information for the program, or to add more optional config parameters, see below for the config file format:
 
-##### email_body.erb
+###### email_body.erb
 
 This file can be edited with CSS/HTML if you want to modify the look of the email.
 
