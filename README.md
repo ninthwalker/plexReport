@@ -28,7 +28,7 @@ The following are needed to run this docker:
 
 ## Installation (unRAID)
 
-Prefered installation method: From the Community Applications 'APPS' section in unRAID.  
+Preferred installation method: From the Community Applications 'APPS' section in unRAID.  
 You can also install by adding the following template repository to unraid:  
 https://github.com/ninthwalker/docker-templates/
 
