@@ -26,7 +26,7 @@ PLEX_REPORT_CONF='/config'
 #/bin/echo "Moving email_body.erb to /config"
 /bin/cp -r etc/* $PLEX_REPORT_CONF
 chmod +666 $PLEX_REPORT_CONF/email_body.erb
-chmod +666 $PLEX_REPORT_CONF/email_schedule.cron
+chmod +666 $PLEX_REPORT_CONF/plexreport_schedule.cron
 
 # /bin/echo "Creating /config/config.yaml"
 /usr/bin/touch /config/config.yaml
