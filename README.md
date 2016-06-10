@@ -47,7 +47,16 @@ plexReport can be run with the following command from unraid:
 You can now edit the `config.yaml` (and optionally `email_body.erb`) with your own settings in your appdata dir.  
 See `/config/config.yaml.example` and below for details.
 
-To schedule the report to occur regulary setup a cron from within unraid:  
+To schedule the report to occur regulary please use the new cron system for unRAID 6.x:
+
+Modify the "plexreport_schedule.cron" with the schedule that you would prefer.
+This file is located in your docker appdata /config location.
+
+Then copy the "plexreport_schedule.cron" to /boot/config/plugins/dynamix.
+Each time unraid is started it will load your plexreport_schedule.
+
+Optionally you can setup the cron the old way:
+
 Enter the following command in the unRAID shell. Replace the day/time with what you want:  
 
 `crontab -l | { cat; echo "30 11 * * 5 docker exec plexReport plexreport -n -d"; } | crontab -`
