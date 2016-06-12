@@ -30,6 +30,7 @@ apt-get clean -y && \
 rm -rf /var/lib/apt/lists/* && \
 git clone https://github.com/ninthwalker/plexReport.git /opt/plexReport
 
+# .
 # Add firstrun.sh to execute during container startup 
 # ADD firstrun.sh /etc/my_init.d/firstrun.sh 
 # RUN chmod +x /etc/my_init.d/firstrun.sh

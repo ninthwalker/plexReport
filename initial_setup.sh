@@ -34,12 +34,11 @@ chmod +666 $PLEX_REPORT_CONF/plexreport_schedule.cron
 /usr/bin/touch /config/plexReport.log
 
 # /bin/echo "Installing ruby gem dependency"
-/usr/bin/gem install bundler # fix world-writable bundle error
-chmod +t -R ~/.bundle/cache
+/usr/bin/gem install bundler -v 1.12.3
 /usr/local/bin/bundle install
 
 # /bin/echo "Running /usr/local/sbin/plexreport-setup"
 /usr/local/sbin/plexreport-setup
 
-/bin/echo "Setup complete! Please create a cronjob from within unRAID to call the plexReport on a schedule."
+/bin/echo "Setup complete! Please see directions for running this on a schedule."
 fi
