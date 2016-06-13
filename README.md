@@ -51,9 +51,11 @@ To schedule the report to occur regulary please use the new cron system for unRA
 
 Edit the "plexreport_schedule.cron" file found in the plexreport appdata folder with your own time/date.
 Copy that file to the following location. Each time unraid is started it will load your plexreport_schedule.
+
 `/boot/config/plugins/dynamix/`
 
-To have it added immediately without restarting unRAID, at the command prompt type `update_cron`
+To have it added immediately without restarting unRAID, at the command prompt type `update_cron`.
+
 See this page for help creating a time/date in cron: http://abunchofutils.com/u/computing/cron-format-helper/
     
 ## Config
