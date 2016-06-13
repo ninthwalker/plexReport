@@ -49,19 +49,12 @@ See `/config/config.yaml.example` and below for details.
 
 To schedule the report to occur regulary please use the new cron system for unRAID 6.x:
 
-Modify the "plexreport_schedule.cron" with the schedule that you would prefer.
-This file is located in your docker appdata /config location.
+Edit the "plexreport_schedule.cron" file found in the plexreport appdata folder with your own time/date.
+Copy that file to the following location. Each time unraid is started it will load your plexreport_schedule.
+`/boot/config/plugins/dynamix/`
 
-Then copy the "plexreport_schedule.cron" to /boot/config/plugins/dynamix.
-Each time unraid is started it will load your plexreport_schedule.
-
-Optionally you can setup the cron the old way:
-
-Enter the following command in the unRAID shell. Replace the day/time with what you want:  
-
-`crontab -l | { cat; echo "30 11 * * 5 docker exec plexReport plexreport -n -d"; } | crontab -`
-
-To keep the cronjob after a reboot, also add the line to your \boot\config\go file.  
+To have it added immediately without restarting unRAID, at the command prompt type `update_cron`
+See this page for help creating a time/date in cron: http://abunchofutils.com/u/computing/cron-format-helper/
     
 ## Config
 
