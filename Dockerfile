@@ -1,4 +1,4 @@
-FROM phusion/baseimage:0.9.15
+FROM phusion/baseimage:0.9.18
 MAINTAINER ninthwalker
 
 # Set correct environment variables
@@ -29,8 +29,3 @@ apt-get install -qy ruby ruby-dev git make gcc inotify-tools && \
 apt-get clean -y && \
 rm -rf /var/lib/apt/lists/* && \
 git clone https://github.com/ninthwalker/plexReport.git /opt/plexReport
-
-# .
-# Add firstrun.sh to execute during container startup 
-# ADD firstrun.sh /etc/my_init.d/firstrun.sh 
-# RUN chmod +x /etc/my_init.d/firstrun.sh

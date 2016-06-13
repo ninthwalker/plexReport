@@ -40,5 +40,5 @@ chmod +666 $PLEX_REPORT_CONF/plexreport_schedule.cron
 # /bin/echo "Running /usr/local/sbin/plexreport-setup"
 /usr/local/sbin/plexreport-setup
 
-/bin/echo "Setup complete! Please see directions for running this on a schedule."
+/bin/echo "Setup complete! Please read directions for running this on a schedule."
 fi
