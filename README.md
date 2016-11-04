@@ -4,7 +4,7 @@ plexReport
 A dockerized version of bstascavage's original plexReport (https://github.com/bstascavage/plexReport)
 
 ## Introduction
-This docker generates an email summary of new additions to Plex to send to your ursers
+This docker generates an email summary of new additions to Plex to send to your users
 
 ## Supported Platforms
 * unRAID, Other Linux
