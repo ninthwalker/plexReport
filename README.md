@@ -35,7 +35,7 @@ https://github.com/ninthwalker/docker-templates/
 After installing, run the following commands from the command line:
 (This initial_setup only has to be done once. Reinstalls of the docker do not require it)
 
-`docker exec -it plexReport ./initial_setup.sh'
+`docker exec -it plexReport ./initial_setup.sh`
 
 Follow Prompts.  
 
