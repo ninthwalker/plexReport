@@ -1,4 +1,4 @@
-FROM phusion/baseimage:0.9.18
+FROM phusion/baseimage:0.9.19
 MAINTAINER ninthwalker
 
 # Set correct environment variables
@@ -11,15 +11,15 @@ ENV LANGUAGE en_US.UTF-8
 # Use baseimage-docker's init system
 CMD ["/sbin/my_init"]
 
+#copy plexReport files
+COPY root/ /
+
 # Configure user nobody to match unRAID's settings
  RUN \
  usermod -u 99 nobody && \
  usermod -g 100 nobody && \
  usermod -d /home nobody && \
  chown -R nobody:users /home
- 
-# Disable SSH
-RUN rm -rf /etc/service/sshd /etc/my_init.d/00_regen_ssh_host_keys.sh
 
 RUN \
 add-apt-repository "deb http://us.archive.ubuntu.com/ubuntu/ trusty universe multiverse" && \
@@ -28,4 +28,9 @@ apt-get update -q && \
 apt-get install -qy ruby ruby-dev git make gcc inotify-tools && \
 apt-get clean -y && \
 rm -rf /var/lib/apt/lists/* && \
-git clone https://github.com/ninthwalker/plexReport.git /opt/plexReport
+cd /opt/gem && \
+gem install bundler -v 1.12.3 && \
+bundle install
+
+VOLUME /config
+

@@ -7,7 +7,7 @@ A dockerized version of bstascavage's original plexReport (https://github.com/bs
 This docker generates an email summary of new additions to Plex to send to your ursers
 
 ## Supported Platforms
-* unRAID
+* unRAID, Other Linux
 
 ## Supported Email Clients
 * Gmail
@@ -33,12 +33,9 @@ You can also install by adding the following template repository to unraid:
 https://github.com/ninthwalker/docker-templates/
 
 After installing, run the following commands from the command line:
-
-`docker exec -it plexReport bash`  
-`cd /opt/plexReport`  
-`./initial_setup.sh`  
-
-Follow Prompts  
+(This initial_setup only has to be done once. Reinstalls of the docker do not require it)
+`docker exec -it plexReport ./initial_setup.sh`  
+Follow Prompts.  
 
 plexReport can be run with the following command from unraid:  
 
@@ -47,7 +44,7 @@ plexReport can be run with the following command from unraid:
 You can now edit the `config.yaml` (and optionally `email_body.erb`) with your own settings in your appdata dir.  
 See `/config/config.yaml.example` and below for details.
 
-To schedule the report to occur regulary please use the new cron system for unRAID 6.x:
+To schedule the report to occur regulary please use the new cron system for unRAID 6:
 
 Edit the "plexreport_schedule.cron" file found in the plexreport appdata folder with your own time/date.
 Copy that file to the following location. Each time unraid is started it will load your plexreport_schedule.
@@ -97,7 +94,9 @@ This file can be edited with CSS/HTML if you want to modify the look of the emai
 
 ## Command-line Options
 
-Once installed, you can run the script by simply running `plexreport` from within the docker image container. If you need to reinstall or reconfigure the program, run `plexreport-setup`.  All commandline options can be seen by running `plexreport --help`
+Once installed, you can run the script by simply running `plexreport` from within the docker image container. 
+
+If you need to reconfigure the program configs, first delete the existing config files and rerun '. /initial_setup.sh`.  All commandline options can be seen by running `plexreport --help`
 
 ##### Options:
 `-n, --no-plex-email` - Do not send emails to Plex friends.  Can be used with the `recipients_email` and `recipients` config file option to customize email recipients.
