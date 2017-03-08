@@ -19,7 +19,8 @@ COPY root/ /
  usermod -u 99 nobody && \
  usermod -g 100 nobody && \
  usermod -d /home nobody && \
- chown -R nobody:users /home
+ chown -R nobody:users /home \
+ /add_new_file.sh
 
 RUN \
 add-apt-repository "deb http://us.archive.ubuntu.com/ubuntu/ trusty universe multiverse" && \
