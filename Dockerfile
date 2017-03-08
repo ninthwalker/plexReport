@@ -20,18 +20,18 @@ COPY root/ /
  usermod -g 100 nobody && \
  usermod -d /home nobody && \
  chown -R nobody:users /home \
- /add_new_file.sh
 
 RUN \
 add-apt-repository "deb http://us.archive.ubuntu.com/ubuntu/ trusty universe multiverse" && \
 add-apt-repository "deb http://us.archive.ubuntu.com/ubuntu/ trusty-updates universe multiverse" && \
 apt-get update -q && \
-apt-get install -qy ruby ruby-dev git make gcc inotify-tools && \
+apt-get install -qy ruby ruby-dev git make gcc && \
 apt-get clean -y && \
 rm -rf /var/lib/apt/lists/* && \
 cd /opt/gem && \
 gem install bundler -v 1.12.3 && \
-bundle install
+bundle install \
+bash -c "/add_new_file.sh"
 
 VOLUME /config
 
