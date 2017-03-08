@@ -371,6 +371,7 @@ def main
 
     YAML.load_file('/config/config.yaml')
     template = ERB.new File.new("/config/email_body.erb").read, nil, "%"
+    webtemplate = ERB.new File.new("/config/web_email_body.erb").read, nil, "%"
     mail = MailReport.new($config, $options)
 
     if (movies.empty? && new_seasons.empty? && new_episodes.empty?)
@@ -380,9 +381,8 @@ def main
 
     mail.sendMail(template.result(binding))
 
-    rm -f "/config/plexreport.html"
     output = File.new("/config/plexreport.html","w")
-    output << template.result(binding)
+    output << webtemplate.result(binding)
     output.close
 	
     $logger.info("Script complete.  Ran in #{Time.now - startTime} seconds")
