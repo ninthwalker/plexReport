@@ -380,6 +380,10 @@ def main
 
     mail.sendMail(template.result(binding))
 
+    output = File.new("/config/plexreport.html","w")
+    output << template.result(binding)
+    output.close
+	
     $logger.info("Script complete.  Ran in #{Time.now - startTime} seconds")
 end
 main()
