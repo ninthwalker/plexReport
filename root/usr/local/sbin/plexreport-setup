@@ -102,7 +102,7 @@ class Setup
         self.setEmail
 
         File.open('/config/config.yaml', 'w') {|f| f.write $config.to_yaml }
-        puts "Writing information to /config/config.yaml"
+        puts "Writing information to config.yaml"
     end
 end
 
