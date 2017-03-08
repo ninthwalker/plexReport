@@ -380,6 +380,7 @@ def main
 
     mail.sendMail(template.result(binding))
 
+    rm -f "/config/plexreport.html"
     output = File.new("/config/plexreport.html","w")
     output << template.result(binding)
     output.close
