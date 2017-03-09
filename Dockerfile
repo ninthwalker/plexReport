@@ -9,10 +9,14 @@ ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US.UTF-8
 
 # Use baseimage-docker's init system
-CMD ["/sbin/my_init", "/add_new_file.sh"]
+CMD ["/sbin/my_init"]
 
 #copy plexReport files
 COPY root/ /
+
+#add new web_email_body.erb
+RUN mkdir -p /etc/my_init.d
+ADD add_new_file.sh /etc/my_init.d/add_new_file.sh
 
 # Configure user nobody to match unRAID's settings
  RUN \
