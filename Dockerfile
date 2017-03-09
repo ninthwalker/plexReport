@@ -30,8 +30,9 @@ apt-get clean -y && \
 rm -rf /var/lib/apt/lists/* && \
 cd /opt/gem && \
 gem install bundler -v 1.12.3 && \
-bundle install && \
-bash -c "/add_new_file.sh"
+bundle install
+
+RUN /add_new_file.sh
 
 VOLUME /config
 
