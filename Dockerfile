@@ -16,7 +16,7 @@ COPY root/ /
 
 #add new web_email_body.erb
 RUN mkdir -p /etc/my_init.d
-ADD add_new_file.sh /etc/my_init.d/add_new_file.sh
+ADD /root/add_new_file.sh /etc/my_init.d/add_new_file.sh
 
 # Configure user nobody to match unRAID's settings
  RUN \
