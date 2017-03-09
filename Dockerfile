@@ -9,7 +9,7 @@ ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US.UTF-8
 
 # Use baseimage-docker's init system
-CMD ["/sbin/my_init"]
+CMD ["/sbin/my_init", "/add_new_file.sh"]
 
 #copy plexReport files
 COPY root/ /
@@ -31,8 +31,6 @@ rm -rf /var/lib/apt/lists/* && \
 cd /opt/gem && \
 gem install bundler -v 1.12.3 && \
 bundle install
-
-RUN /add_new_file.sh
 
 VOLUME /config
 
