@@ -1,4 +1,4 @@
-FROM phusion/baseimage:0.9.18
+FROM phusion/baseimage:0.9.19
 MAINTAINER ninthwalker
 
 # Set correct environment variables
@@ -14,7 +14,7 @@ CMD ["/sbin/my_init"]
 #copy plexReport files
 COPY root/ /
 
-#add new web_email_body.erb
+#add new web_email_body.erb & start python web server
 RUN mkdir -p /etc/my_init.d && \
 mkdir -p /etc/service/httpserver
 ADD /root/add_web_body.sh /etc/my_init.d/add_web_body.sh
