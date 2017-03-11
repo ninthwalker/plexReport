@@ -2,7 +2,7 @@ FROM alpine:3.5
 MAINTAINER ninthwalker <ninthwalker@gmail.com>
 
 ENV BUILD_PACKAGES bash curl-dev ruby-dev build-base
-ENV RUBY_PACKAGES ruby ruby-io-console ruby-bundler
+ENV RUBY_PACKAGES ruby ruby-io-console
 
 #copy plexReport files
 COPY root/ /
@@ -25,9 +25,9 @@ python
 
 # may need build-base (includes make, gcc and others, but is large (like 100mb)
 
-#RUN cd /opt/gem
-#gem install bundler -v 1.12.3 && \
-#RUN bundle install
+RUN cd /opt/gem
+gem install bundler -v 1.12.3 && \
+RUN bundle install
 
 #RUN add_web_body.sh
 
