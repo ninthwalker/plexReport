@@ -2,7 +2,7 @@ FROM alpine:3.5
 MAINTAINER ninthwalker <ninthwalker@gmail.com>
 
 ENV BUILD_PACKAGES bash curl-dev ruby-dev build-base
-ENV RUBY_PACKAGES ruby ruby-io-console
+ENV RUBY_PACKAGES ruby ruby-io-console ruby-bundler
 
 #copy plexReport files
 COPY root/ /
@@ -19,8 +19,7 @@ WORKDIR /config
 RUN apk --no-cache add \
 $BUILD_PACKAGES \
 $RUBY_PACKAGES \
-python \
-ruby-bundler==1.12.5-r0
+python
 #make \
 #gcc \
 
