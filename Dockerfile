@@ -1,8 +1,8 @@
 FROM alpine:3.5
 MAINTAINER ninthwalker <ninthwalker@gmail.com>
 
-ENV BUILD_PACKAGES bash curl-dev ruby-dev
-ENV RUBY_PACKAGES ruby ruby-io-console ruby-bundler
+ENV BUILD_PACKAGES bash curl-dev ruby-dev build-base
+ENV RUBY_PACKAGES ruby ruby-io-console
 
 #copy plexReport files
 COPY root/ /
@@ -19,14 +19,16 @@ WORKDIR /config
 RUN apk --no-cache add \
 $BUILD_PACKAGES \
 $RUBY_PACKAGES \
-make \
-gcc \
-python
+python \
+ruby-bundler==1.12.5-r0
+#make \
+#gcc \
+
 # may need build-base (includes make, gcc and others, but is large (like 100mb)
 
-#RUN cd /opt/gem
+RUN cd /opt/gem
 #gem install bundler -v 1.12.3 && \
-#RUN bundle install
+RUN bundle install
 
 #RUN add_web_body.sh
 
