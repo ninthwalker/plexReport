@@ -15,8 +15,10 @@ CMD ["/sbin/my_init"]
 COPY root/ /
 
 #add new web_email_body.erb
-RUN mkdir -p /etc/my_init.d
-ADD /root/add_new_file.sh /etc/my_init.d/add_new_file.sh
+RUN mkdir -p /etc/my_init.d && \
+mkdir -p /etc/service/httpserver
+ADD /root/add_web_body.sh /etc/my_init.d/add_web_body.sh
+ADD /root/httpserver.sh /etc/service/httpserver/run
 
 # Configure user nobody to match unRAID's settings
  RUN \
@@ -31,10 +33,11 @@ add-apt-repository "deb http://us.archive.ubuntu.com/ubuntu/ trusty-updates univ
 apt-get update -q && \
 apt-get install -qy ruby ruby-dev git make gcc && \
 apt-get clean -y && \
-rm -rf /var/lib/apt/lists/* && \
+rm -rf /var/lib/apt/lists/* /var/tmp/* /tmp/* && \
 cd /opt/gem && \
 gem install bundler -v 1.12.3 && \
 bundle install
 
 VOLUME /config
+EXPOSE 8080
 
