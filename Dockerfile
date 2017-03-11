@@ -9,7 +9,7 @@ COPY root/ /
 WORKDIR /config
 
 # ---------------------------------------------
-# THESE WERE THE COMMANDS IN PHUSION
+# THESE WERE THE COMMANDS IN PHUSION.
 # RUN mkdir -p /etc/my_init.d && \
 # mkdir -p /etc/service/httpserver
 # ADD /root/add_web_body.sh /etc/my_init.d/add_web_body.sh
