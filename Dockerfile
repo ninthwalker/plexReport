@@ -26,7 +26,7 @@ python
 # may need build-base (includes make, gcc and others, but is large (like 100mb)
 
 RUN cd /opt/gem
-gem install bundler -v 1.12.3 && \
+RUN gem install bundler -v 1.12.3
 RUN bundle install
 
 #RUN add_web_body.sh
