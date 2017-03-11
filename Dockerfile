@@ -16,13 +16,6 @@ WORKDIR /config
 # ADD /root/httpserver.sh /etc/service/httpserver/run
 # ----------------------------------------------------
 
-# Configure user nobody to match unRAID's settings
- #RUN \
- #usermod -u 99 nobody && \
- #usermod -g 100 nobody && \
- #usermod -d /home nobody && \
- #chown -R nobody:users /home
-
 RUN apk --no-cache add \
 $BUILD_PACKAGES \
 $RUBY_PACKAGES \
@@ -31,10 +24,9 @@ gcc \
 python
 # may need build-base (includes make, gcc and others, but is large (like 100mb)
 
-RUN \
-cd /opt/gem && \
-gem install bundler -v 1.12.3 && \
-bundle install
+RUN cd /opt/gem
+#gem install bundler -v 1.12.3 && \
+RUN bundle install
 
 #RUN add_web_body.sh
 
