@@ -1,42 +1,44 @@
-FROM phusion/baseimage:0.9.18
-MAINTAINER ninthwalker
+FROM alpine:3.5
+MAINTAINER ninthwalker <ninthwalker@gmail.com>
 
-# Set correct environment variables
-ENV HOME /root 
-ENV DEBIAN_FRONTEND noninteractive 
-ENV LC_ALL C.UTF-8
-ENV LANG en_US.UTF-8 
-ENV LANGUAGE en_US.UTF-8
-
-# Use baseimage-docker's init system.
-CMD ["/sbin/my_init"]
+ENV BUILD_PACKAGES bash curl-dev ruby-dev
+ENV RUBY_PACKAGES ruby ruby-io-console ruby-bundler
 
 #copy plexReport files
 COPY root/ /
+WORKDIR /config
 
-#add new web_email_body.erb
-RUN mkdir -p /etc/my_init.d && \
-mkdir -p /etc/service/httpserver
-ADD /root/add_web_body.sh /etc/my_init.d/add_web_body.sh
-ADD /root/httpserver.sh /etc/service/httpserver/run
+# ---------------------------------------------
+# THESE WERE THE COMMANDS IN PHUSION
+# RUN mkdir -p /etc/my_init.d && \
+# mkdir -p /etc/service/httpserver
+# ADD /root/add_web_body.sh /etc/my_init.d/add_web_body.sh
+# ADD /root/httpserver.sh /etc/service/httpserver/run
+# ----------------------------------------------------
 
 # Configure user nobody to match unRAID's settings
- RUN \
- usermod -u 99 nobody && \
- usermod -g 100 nobody && \
- usermod -d /home nobody && \
- chown -R nobody:users /home
+ #RUN \
+ #usermod -u 99 nobody && \
+ #usermod -g 100 nobody && \
+ #usermod -d /home nobody && \
+ #chown -R nobody:users /home
+
+RUN apk --no-cache add \
+$BUILD_PACKAGES \
+$RUBY_PACKAGES \
+make \
+gcc \
+python
+# may need build-base (includes make, gcc and others, but is large (like 100mb)
 
 RUN \
-add-apt-repository "deb http://us.archive.ubuntu.com/ubuntu/ trusty universe multiverse" && \
-add-apt-repository "deb http://us.archive.ubuntu.com/ubuntu/ trusty-updates universe multiverse" && \
-apt-get update -q && \
-apt-get install -qy ruby ruby-dev git make gcc && \
-apt-get clean -y && \
-rm -rf /var/lib/apt/lists/* /var/tmp/* /tmp/* && \
 cd /opt/gem && \
 gem install bundler -v 1.12.3 && \
 bundle install
+
+#RUN add_web_body.sh
+
+CMD ["python -m SimpleHTTPServer 8080"]
 
 VOLUME /config
 EXPOSE 8080
