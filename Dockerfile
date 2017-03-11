@@ -30,7 +30,7 @@ python
 
 #RUN add_web_body.sh
 
-CMD ["python -m SimpleHTTPServer 8080"]
+CMD ["python", "-m", "SimpleHTTPServer", "8080"]
 
 VOLUME /config
 EXPOSE 8080
