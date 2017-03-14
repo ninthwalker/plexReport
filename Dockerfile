@@ -32,7 +32,7 @@ ruby-rdoc
 RUN cd /opt/gem/
 RUN gem install bundler -v $BUNDLER_VERSION --no-ri --no-rdoc
 RUN bundle config --global silence_root_warning 1
-RUN bundle install
+RUN bundle update
 
 #RUN add_web_body.sh
 
