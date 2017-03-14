@@ -3,6 +3,7 @@ MAINTAINER ninthwalker <ninthwalker@gmail.com>
 
 ENV BUILD_PACKAGES bash curl-dev ruby-dev build-base
 ENV RUBY_PACKAGES ruby ruby-io-console
+ENV BUNDLER_VERSION 1.12.3
 
 #copy plexReport files
 COPY root/ /
@@ -19,14 +20,18 @@ WORKDIR /config
 RUN apk --no-cache add \
 $BUILD_PACKAGES \
 $RUBY_PACKAGES \
-python
+python \
+ruby-irb \
+ruby-json \
+ruby-rake \
+ruby-rdoc && \
+bundle config --global silence_root_warning 1
 #make \
 #gcc \
-
 # may need build-base (includes make, gcc and others, but is large (like 100mb)
 
 RUN cd /opt/gem
-RUN gem install bundler -v 1.12.3
+RUN gem install bundler -v $BUNDLER_VERSION --no-ri --no-rdoc
 RUN bundle install
 
 #RUN add_web_body.sh
