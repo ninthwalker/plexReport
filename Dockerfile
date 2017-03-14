@@ -24,14 +24,14 @@ python \
 ruby-irb \
 ruby-json \
 ruby-rake \
-ruby-rdoc && \
-bundle config --global silence_root_warning 1
+ruby-rdoc
 #make \
 #gcc \
 # may need build-base (includes make, gcc and others, but is large (like 100mb)
 
 RUN cd /opt/gem
 RUN gem install bundler -v $BUNDLER_VERSION --no-ri --no-rdoc
+RUN bundle config --global silence_root_warning 1
 RUN bundle install
 
 #RUN add_web_body.sh
