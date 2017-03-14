@@ -18,15 +18,15 @@ WORKDIR /opt/gem
 # ----------------------------------------------------
 
 RUN apk add --update \
-$BUILD_PACKAGES
-# $RUBY_PACKAGES \
-RUN apk add --update ruby=2.2.4-r0
-RUN apk add --update ruby-io-console=2.2.4-r0
-RUN apk add --update python \
+$BUILD_PACKAGES \
+ruby \
+ruby-io-console \
+python \
 ruby-irb \
 ruby-json \
 ruby-rake \
 ruby-rdoc
+# $RUBY_PACKAGES \
 #make \
 #gcc \
 # may need build-base (includes make, gcc and others, but is large (like 100mb)
