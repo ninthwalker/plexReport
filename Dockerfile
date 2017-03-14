@@ -29,4 +29,4 @@ RUN gem install bundler -v $BUNDLER_VERSION --no-ri --no-rdoc
 RUN bundle config --global silence_root_warning 1
 RUN bundle install
 
-CMD ["ruby", "-run", "httpd", ".", "-p", "6878"]
+CMD ["ruby", "-run", "-e", "httpd", ".", "-p", "6878"]
