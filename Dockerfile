@@ -1,4 +1,4 @@
-FROM alpine:3.4
+FROM alpine:3.3
 MAINTAINER ninthwalker <ninthwalker@gmail.com>
 
 VOLUME /config
