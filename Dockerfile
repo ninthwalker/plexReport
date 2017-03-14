@@ -2,7 +2,7 @@ FROM alpine:3.5
 MAINTAINER ninthwalker <ninthwalker@gmail.com>
 
 ENV BUILD_PACKAGES bash curl-dev ruby-dev build-base
-ENV RUBY_PACKAGES ruby ruby-io-console
+# ENV RUBY_PACKAGES
 ENV BUNDLER_VERSION 1.12.3
 
 #copy plexReport files
@@ -20,6 +20,8 @@ WORKDIR /opt/gem
 RUN apk --no-cache add \
 $BUILD_PACKAGES \
 $RUBY_PACKAGES \
+ruby=2.2.4-r0 \
+ruby-io-console=2.2.4-r0 \
 python \
 ruby-irb \
 ruby-json \
@@ -32,7 +34,7 @@ ruby-rdoc
 RUN cd /opt/gem/
 RUN gem install bundler -v $BUNDLER_VERSION --no-ri --no-rdoc
 RUN bundle config --global silence_root_warning 1
-RUN bundle update
+RUN bundle install
 
 #RUN add_web_body.sh
 
