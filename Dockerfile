@@ -7,7 +7,7 @@ ENV BUNDLER_VERSION 1.12.3
 
 #copy plexReport files
 COPY root/ /
-WORKDIR /config
+WORKDIR /opt/gem
 
 # ---------------------------------------------
 # THESE WERE THE COMMANDS IN PHUSION.
@@ -32,7 +32,7 @@ ruby-rdoc
 RUN cd /opt/gem
 RUN gem install bundler -v $BUNDLER_VERSION --no-ri --no-rdoc
 RUN bundle config --global silence_root_warning 1
-RUN bundle install
+RUN bundle
 
 #RUN add_web_body.sh
 
