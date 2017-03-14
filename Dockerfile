@@ -1,4 +1,4 @@
-FROM alpine:3.5
+FROM alpine:3.2
 MAINTAINER ninthwalker <ninthwalker@gmail.com>
 
 ENV BUILD_PACKAGES bash curl-dev ruby-dev build-base
