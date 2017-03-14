@@ -17,12 +17,12 @@ WORKDIR /opt/gem
 # ADD /root/httpserver.sh /etc/service/httpserver/run
 # ----------------------------------------------------
 
-RUN apk --no-cache add \
-$BUILD_PACKAGES \
-$RUBY_PACKAGES \
-ruby=2.2.4-r0 \
-ruby-io-console=2.2.4-r0 \
-python \
+RUN apk add --update \
+$BUILD_PACKAGES
+# $RUBY_PACKAGES \
+RUN apk add --update ruby=2.2.4-r0
+RUN apk add --update ruby-io-console=2.2.4-r0
+RUN apk add --update python \
 ruby-irb \
 ruby-json \
 ruby-rake \
