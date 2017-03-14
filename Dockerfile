@@ -4,8 +4,8 @@ MAINTAINER ninthwalker <ninthwalker@gmail.com>
 VOLUME /config
 EXPOSE 6878
 
-ENV BUILD_PACKAGES curl-dev ruby-dev
-# ENV RUBY_PACKAGES
+ENV BUILD_PACKAGES bash curl-dev ruby-dev
+#ENV RUBY_PACKAGES
 ENV BUNDLER_VERSION 1.12.3
 
 #copy nowShowing files
@@ -16,13 +16,12 @@ RUN apk add --update \
 $BUILD_PACKAGES \
 ruby \
 ruby-io-console \
-python \
-ruby-irb \
 ruby-json \
-ruby-rake \
-ruby-rdoc \
 make \
 gcc
+#ruby-irb 
+#ruby-rake
+#ruby-rdoc
 # $RUBY_PACKAGES \
 # may need build-base (includes make, gcc and others, but is large (like 100mb)
 
@@ -30,4 +29,4 @@ RUN gem install bundler -v $BUNDLER_VERSION --no-ri --no-rdoc
 RUN bundle config --global silence_root_warning 1
 RUN bundle install
 
-CMD ["python", "-m", "SimpleHTTPServer", "6878"]
+CMD ["ruby", "-run", "httpd", ".", "-p", "6878"]
