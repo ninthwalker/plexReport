@@ -29,10 +29,10 @@ ruby-rdoc
 #gcc \
 # may need build-base (includes make, gcc and others, but is large (like 100mb)
 
-RUN cd /opt/gem
+RUN cd /opt/gem/
 RUN gem install bundler -v $BUNDLER_VERSION --no-ri --no-rdoc
 RUN bundle config --global silence_root_warning 1
-RUN bundle
+RUN bundle install
 
 #RUN add_web_body.sh
 
